@@ -1,0 +1,19 @@
+<!--<div *ngFor='let track of tracks'>
+  {{track.name}} || {{track.artist.name}}
+  <img [src]='track.artist.image.text'>
+</div>>-->
+
+<mat-form-field class="field" appearance="outline">
+  <mat-label class="label">Search Artist</mat-label>
+  <input (keyup)="onKey($event)" matInput class="input">
+  <mat-icon matSuffix>
+    <i class="material-icons">search</i>
+  </mat-icon>
+
+</mat-form-field>
+
+
+<div class="container">
+  <app-card *ngFor='let track of tracks' [track]=track (addToWishList)=addToWishList($event)>
+  </app-card>
+</div>

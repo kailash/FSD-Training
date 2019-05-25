@@ -1,0 +1,84 @@
+version: '3'
+services:
+  rabbitmq:
+    image: rabbitmq:management
+    ports: 
+      - 15672:15672
+      - 5672:5672
+    healthcheck:
+      test: "exit 0"
+
+  authService:
+    image: kailashadhikariibm/authenticationservice:v3
+    restart: always
+    network_mode: host
+    depends_on:
+      - mysql
+      - eurekaServer
+      - rabbitmq
+    ports:
+      - 8084:8084
+    healthcheck:
+      test: "exit 0"
+
+  
+  userTrackService: 
+    image: kailashadhikariibm/usertrackservice:v3
+    restart: always
+    network_mode: host
+    container_name: usertrackCon
+    depends_on:
+      - mongo
+      - eurekaServer
+      - rabbitmq
+    ports: 
+      - 8085:8085
+    healthcheck:
+      test: "exit 0"
+
+  eurekaServer:
+    image: kailashadhikariibm/eurekaservice:v1
+    restart: always
+    network_mode: host
+    ports:
+      - 9003:9003
+    healthcheck:
+      test: "exit 0"
+
+  zuulservice:
+    image: kailashadhikariibm/zuulservice:v1
+    restart: always
+    network_mode: host
+    ports:
+      - 8086:8086
+    healthcheck:
+      test: "exit 0"
+
+  mysql:
+    image: mysql:5.5
+    ports: 
+      - 3306:3306
+    network_mode: host
+    environment: 
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: UserDb
+      MYSQL_USER: approot
+      MYSQL_PASSWORD: root123
+
+  angular:
+    image: kailashadhikariibm/muzixservicefrontendwithauth:v3
+    network_mode: host
+    container_name: angular-docker
+    ports: 
+      - 8080:8080
+    healthcheck:
+      test: "exit 0" 
+   
+  mongo:
+    image: mongo:3.2-jessie
+    ports:
+      - 27017:27017
+    container_name: mongo
+    network_mode: host
+    healthcheck:
+      test: "exit 0"

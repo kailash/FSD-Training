@@ -1,0 +1,31 @@
+image: java:8-jdk
+stages:
+  - test
+  - build
+services:
+  - 'mysql:5.5'
+  - 'mongo:3.4-jessie'
+variables:
+  MYSQL_DATABASE: "userDb"
+  MYSQL_URL: "jdbc:mysql://mysql/userDb"
+  MYSQL_USER: "app_root"
+  MYSQL_PASSWORD: "root"
+  MYSQL_ROOT_PASSWORD: "root"
+  MONGO_DATABASENAME: muzixdb
+  MONGO_URL: mongodb://mongo/muzixdb
+cache:
+  paths:
+    - .m2/repository
+    - target
+maven-test:
+  image: maven:3-jdk-8
+  stage: test
+  script: "mvn test -B"
+maven-build:
+  image: maven:3-jdk-8
+  stage: build
+  script: "mvn package -U"
+  artifacts:
+    paths:
+      - target/*.jar
+  

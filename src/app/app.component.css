@@ -1,0 +1,10 @@
+.container{
+    display:flex;
+    flex-direction: column; 
+    background-color: #222121;
+    min-height: 100vh;
+}
+
+.content{
+    flex:1;
+}

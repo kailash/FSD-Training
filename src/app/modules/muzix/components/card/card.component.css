@@ -1,0 +1,45 @@
+.example-card{
+    display:flex;
+    flex-direction: column;
+    height: 45vh;
+    width: 20vw;
+    margin: 1em;
+    text-align: center;
+    margin-top: 10vh;
+    background-color: #424242;
+}
+
+.header{
+    font-family:'Margarine', cursive;
+    margin:auto;
+    color:#fff;
+}
+
+.mat-card-title{
+    text-align: center;
+    color:#fff;
+}
+
+.mat-card-subtitle{
+    text-align: center;
+    color:#fff;
+}
+
+.image{
+    height:25vh;
+    width: 15vw;
+    margin:auto;
+}
+
+.mat-fab.mat-accent,.mat-flat-button.mat-accent,.mat-mini-fab.mat-accent,.mat-raised-button.mat-accent{
+    background-color: #9c1148;
+    margin-left: 10px;
+}
+
+.mat-icons{
+    color:#fff;
+}
+
+.material-icons{
+    color:#fff;
+}
